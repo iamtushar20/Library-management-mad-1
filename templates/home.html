@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Library Management System</h2>
+    <p>Explore our collection of books and manage your library account.</p>
+
+    <h3>Featured Books</h3>
+    <ul>
+        <li>The Great Gatsby</li>
+        <li>To Kill a Mockingbird</li>
+        <li>1984</li>
+        <li>Harry Potter and the Sorcerer's Stone</li>
+        <!-- Add more books as needed -->
+        <a href="{{url_for('test')}}">Test </a>
+
+    <p>Ready to get started? <a href="/login">Login</a> or <a href="/register">Register</a></p>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    Add Section
+
+{% endblock %}
+
+
+{% block content %}
+<h2>Add Section</h2>
+<div class="form_group">
+    
+    <form action="" method="post">
+    <label for="name">Section Name:</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="date_created">Date Created :</label>
+    <input type="date" name="date_created" id="date_created" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter your description here"></textarea><br><br>
+
+
+    <button type="submit">Add</button>
+
+</form>
+
+</div>
+
+
+
+{% endblock %}

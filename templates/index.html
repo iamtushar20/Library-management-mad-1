@@ -1,1 +1,35 @@
-<h2>This is index.html</h2>
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Library Management System</h2>
+    <p>Explore our collection of books and manage your library account.</p>
+    <a href="{{url_for('user_book_issue_history')}}">See Your Requests</a>
+    <a href="{{url_for('user_book_issue')}}">See your Books</a>
+    <div class="section">
+    {% for section in sections %}
+        <h2>{{section.name}}</h2>
+        <div class="card">
+            {% for book in section.books %}
+            <div class="">
+                <img src=".{{ url_for('static', filename='images/education-con,cept-with-book.jpg') }}" alt="{{book.name}}">
+                <div class="desc">
+                    <h3>{{book.name}}</h3>
+                    <p>{{book.authors}}</p>
+
+                    <a href="{{url_for('book_request', book_id=book.id)}}" class="btn btn-primary">Request</a>
+                    <a href="" class="btn btn-success">Buy</a>
+                </div>
+            </div>
+            {{book.name}}
+
+        {% endfor %}
+
+        </div>
+     
+    {% endfor %}
+    </div>
+
+    
+{% endblock %}

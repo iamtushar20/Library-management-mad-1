@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Books of Section {{section.name}}
+
+{% endblock %}
+
+
+{% block content %}
+<h1>Section {{section.name}} </h1>
+<div>
+    <h2>Books:</h2>
+    <a href="{{url_for('add_book', section_id=section.id)}}">
+        <i class="fas fa-plus "></i>
+        Add
+    </a>
+
+</div>
+
+
+<div>
+    <h2>Books in this Section</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Authors</th>
+                <th>Date Added</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in section.books %}
+                <tr>
+                    
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.authors }}</td>
+                    <td>{{ book.date_added }}</td>
+                    
+                    <td>
+                        <a href="{{url_for('edit_book', id=book.id)}}" class="btn btn-primary">
+                            <i class="fas fa-edit    "></i>
+                            Edit
+                        </a>
+                        <a href="{{url_for('delete_book', id=book.id)}}" class="btn btn-danger">
+                            <i class="fas fa-trash    "></i>
+                            Delete
+                        </a>
+                      
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+{% endblock %}

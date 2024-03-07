@@ -1,0 +1,46 @@
+{% extends 'base.html'%}
+
+
+{% block title %}
+   Book Issued
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Admin DashBoard</h1>
+
+
+
+
+<h2>Book Issued status of</h2>
+
+
+<table class="styled-table">
+   <thead>
+      <tr>
+         
+         <th>Username</th>
+         <th>Request Date</th>
+         <th>Return Date</th>
+
+         
+         
+         
+      </tr>
+   </thead>
+
+   <tbody>
+      {% for issue in book_issues %}
+      {% if issue.approved == 'Accepted' %}
+      <tr>
+         <td>{{ issue.user_name }}</td>
+         <td>{{ issue.issue_date }}</td>
+         <td>{{ issue.return_date }}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+   </tbody>
+</table>
+
+{% endblock%}

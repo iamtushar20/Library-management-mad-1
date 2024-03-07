@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+
+{% block title %}
+   Book Issued
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Admin DashBoard</h1>
+
+
+
+
+<h2>Book Issued Status</h2>
+
+
+<table class="styled-table">
+   <thead>
+      <tr>
+         
+         <th>Book Name</th>
+         
+         
+         
+      </tr>
+   </thead>
+
+   <tbody>
+      {% for req in book_issue %}
+      <tr>
+         {% if req.approved == 'Accepted' %}
+         <td><a href="{{url_for('book_status_info', name=req.book_name)}}">{{req.book_name}}</a></td>
+         {% endif %}
+         
+         
+        
+         
+       
+         
+        
+      </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+{% endblock%}
