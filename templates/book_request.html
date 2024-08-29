@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'user_base.html' %}
 
 {% block title %}
     Book Request
@@ -8,21 +8,21 @@
 
 <h1></h1>
 
-<div class="form_group">
-    <form action="" method="post">
-        <!-- Form fields -->
+<div class="form-group">
+    <form action="" method="post" class="form">
+        
     
-        <label for="user_name">User Name: </label><br>
-        <input type="text" id="user_name" name="user_name" value="{{user.username}}" required><br>
+        <label for="user_name" class="form-label">User Name: </label><br>
+        <input type="text" id="user_name" name="user_name" value="{{user.username}}" required class="form-control" readonly><br>
 
-        <label for="book_name">Book Name:</label><br>
-        <input type="text" id="book_name" name="book_name" value="{{book.name}}" required><br>
+        <label for="book_name" class="form-label">Book Name:</label><br>
+        <input type="text" id="book_name" name="book_name" value="{{book.name}}" required class="form-control" readonly><br>
 
-        <label for="request_date">Request Date:</label><br>
-        <input type="date" id="request_date" name="request_date" required><br><br>
+        <label for="request_date" class="form-label">Request Date:</label><br>
+        <input type="date" id="request_date" name="request_date" required class="form-control"><br><br>
 
-        <label for="return_date">Return Date:</label><br>
-        <input type="date" id="return_date" name="return_date" required><br><br>
+        <label for="return_date" class="form-label">Return Date:</label><br>
+        <input type="date" id="return_date" name="return_date" required class="form-control"><br><br>
 
 
         <button type="submit" class="btn btn-success">

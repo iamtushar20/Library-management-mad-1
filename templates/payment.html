@@ -1,0 +1,32 @@
+{% extends 'user_base.html'%}
+
+{% block title %}
+    Download
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="form-group">
+    
+    <form action="" method="post" class="form">
+        <label for="name" class="form-label"><b>Name</b></label>
+        <input type="text" name="name" id="name" value="{{user.name}}" required class="form-control" readonly><br>
+        <label for="book" class="form-label"><b>Book Name</b></label>
+        <input type="text" name="book" id="book" value="{{book.name}}" required class="form-control" readonly><br>
+        <label for="author" class="form-label"><b>Author</b></label>
+        <input type="text" name="author" id="author" value="{{book.authors}}" required class="form-control" readonly><br>
+
+        
+
+
+        <a href="{{url_for('download_book', name=book.name)}}" class="btn btn-outline-success">Pay  Rs. {{book.price}} </a>
+
+   </form>
+
+</div>
+
+
+
+{% endblock %}

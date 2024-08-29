@@ -1,25 +1,23 @@
-{% extends 'base.html'%}
+{% extends 'user_base.html'%}
 
 
 {% block title %}
-   Book Issued
+   Your Books
 {% endblock %}
 
 
 {% block content %}
 
-<h1>User DashBoard</h1>
 
 
 
+<h2 style="text-align: center;">Book Issued</h2>
 
-<h2>Book Issued</h2>
 
-
-<table class="styled-table">
+<table class="table">
    <thead>
       <tr>
-         <th>Id</th>
+         
          <th>Book Name</th>
          <th>Authors</th>
          <th>Request Date</th>
@@ -27,6 +25,7 @@
          <th> Status </th>
          <th>Read</th>
          <th>Return</th>
+         <th>Feedback</th>
          
          
       </tr>
@@ -36,7 +35,7 @@
       {% for req in book_issue %}
       <tr>
         {% if req.approved == "Accepted" %}
-         <td>{{req.id}}</td>
+         
          <td>{{req.book_name}}</td>
          <td>{{req.book_author}}</td>
          <td>{{req.issue_date}}</td>
@@ -44,8 +43,9 @@
          <td>{{req.approved}}</td>
 
 
-         <td><a href="{{req.read}}">Read</a></td>
-         <td><a href="{{url_for('user_book_return', id=req.id)}}">Return</a></td>
+         <td><a href="{{url_for('get_book_content',name=req.book_name)}}" class="btn btn-outline-primary">Read</a></td>
+         <td><a href="{{url_for('user_book_return', id=req.id)}}" class="btn btn-outline-danger">Return</a></td>
+         <td><a href="{{url_for('feedback', id=req.id)}}" class="btn btn-outline-secondary">Feedback</a></td>
 
          
           

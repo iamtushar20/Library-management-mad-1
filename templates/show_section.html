@@ -1,0 +1,62 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}
+      Sections
+  
+
+{% endblock %}
+
+
+{% block content %}
+<h2 style="text-align: center;">All Sections</h2>
+<button class="btn btn-link"><a href="{{ url_for('add_section') }}" class="btn btn-outline-success">Add Section</a></button>
+
+
+<table class="table">
+   <thead>
+      <tr>
+         
+         <th>Section Name</th>
+         <th>Date Created</th>
+         <th>Description</th>
+         <th>Actions</th>
+      </tr>
+   </thead>
+
+   <tbody>
+      {% for section in sections %}
+      <tr>
+         
+         <td>{{section.name}}</td>
+         <td>{{section.date_created}}</td>
+         <td>{{section.description}}</td>
+         <td>
+            <a href="{{url_for('show_section', id=section.id)}}" class="btn btn-outline-primary">
+               See Books
+               
+            </a>
+
+            <a href="{{url_for('edit_section', id=section.id)}}" class="btn btn-outline-secondary">
+               Edit Section
+               
+               
+            </a>
+
+            <a href="{{url_for('delete_section', id=section.id)}}" class="btn btn-outline-danger">
+               Delete Section
+               
+            </a>
+           
+         </td>
+      </tr>
+      {% endfor %}
+   </tbody>
+</table>
+
+
+
+
+
+
+
+{% endblock %}

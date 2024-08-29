@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 
 {% block title %}
     Delete Category
@@ -7,13 +7,13 @@
 {% block content %}
 
 <h1 class="display-4">
-    Delete Category
+    Delete Section
 </h1>
 <p class="">Are you sure you want to delete <b>{{section.name}}</b>?</p>
-<div class="form_group">
+<div class="form-group">
     <form action="" method="post" class="form">
         <button type="submit" class="btn btn-danger">
-            <i class="fas fa-trash    "></i>
+            
             Delete
         </button>
     </form>

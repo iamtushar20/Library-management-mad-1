@@ -1,0 +1,28 @@
+{% extends 'admin_base.html'%}
+
+
+{% block title %}
+   FeedBack
+{% endblock %}
+
+
+{% block content %}
+
+
+<h2>Feedback of book "{{ name }}"</h2>
+    
+<ul>
+    {% for feedback in user_feedback %}
+    <li>
+        <strong>User Name:</strong> {{ feedback[0] }}<br>
+        <strong>FeedBack:</strong> {{ feedback[1] }}<br>
+        
+    </li>
+    {% endfor %}
+</ul>
+      
+
+
+
+
+{% endblock%}

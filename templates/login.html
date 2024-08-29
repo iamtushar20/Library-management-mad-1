@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="form">
-        <h2>Login</h2>
-        <form action="/login" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+<h2>Login</h2>
+    <div class="form-group">
+      
+        <form action="/login" method="post" class="form">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" id="username" name="username" required class="form-control"><br>
 
-            <input type="submit" value="Login">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" name="password" required class="form-control"><br>
+
+            <input type="submit" value="Login" class="btn btn-primary">
         </form>
     <p>Don't have an account? <a href="/register">Register here</a></p>
 

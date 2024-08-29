@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}
+  Book Issued List
+
+{% endblock %}
+
+
+{% block content %}
+<h2 style="text-align: center;">Book Issued List</h2>
+<table class="table">
+   <thead>
+      <tr>
+         
+         <th>Username</th>
+         <th>Book Name</th>
+         <th>Issue Date </th>
+         <th>Return Date</th>
+         <th>Revoke</th>
+         
+      </tr>
+   </thead>
+
+   <tbody>
+      {% for issue in book_issues %}
+      {% if issue.approved == 'Accepted' %}
+      <tr>
+         
+         <td>{{issue.user_name}}</td>
+         <td>{{issue.book_name}}</td>
+         <td>{{issue.issue_date}}</td>
+         <td>{{issue.return_date}}</td>
+         <td><a href="{{url_for('book_revoke', id=issue.id)}} "class="btn btn-outline-danger">Revoke</a></td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+   </tbody>
+</table>
+
+{% endblock %}

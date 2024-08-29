@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 
 {% block title %}
     Add Book
@@ -8,11 +8,11 @@
 
 <h1>Add Book to {{ section.name }}</h1>
 
-<div class="form_group">
-    <form action="{{url_for('add_book_post')}}" method="post">
+<div class="form-group">
+    <form action="{{url_for('add_book_post')}}" method="post" class="form">
 
-        <label for="section_id">Section:</label>
-        <select name="section_id" id="section_id" required>
+        <label for="section_id" class="form-label">Section:</label> 
+        <select name="section_id" id="section_id" required class="form-control">
             {% for sec in sections %}
             {% if sec.id == section.id %}
                 <option  selected value="{{sec.id}}">{{sec.name}}</option>
@@ -20,18 +20,21 @@
             <option value="{{sec.id}}">{{sec.name}}</option>
             {% endif %}
             {% endfor %}
-        </select>
-        <label for="name">Book Name:</label>
-        <input type="text" name="name" id="name" required>
+        </select> <br>
+        <label for="name" class="form-label">Book Name:</label>
+        <input type="text" name="name" id="name" required class="form-control">
 
-        <label for="content">Content:</label>
-        <textarea id="content" name="content" rows="4" cols="50" required></textarea>
+        <label for="content" class="form-label">Content:</label>
+        <textarea id="content" name="content" rows="4" cols="50" required class="form-control"></textarea>
 
-        <label for="authors">Authors:</label>
-        <input type="text" name="authors" id="authors" required>
+        <label for="authors" class="form-label">Authors:</label>
+        <input type="text" name="authors" id="authors" required class="form-control">
 
-        <label for="date_added">Date Added:</label>
-        <input type="date" name="date_added" id="date_added" required>
+        <label for="date_added" class="form-label">Date Added:</label>
+        <input type="date" name="date_added" id="date_added" required class="form-control">
+
+        <label for="price" class="form-label">Price:</label>
+        <input type="number" name="price" id="price" required class="form-control">
 
         
         <button type="submit" class="btn btn-success">

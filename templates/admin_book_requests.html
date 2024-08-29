@@ -1,25 +1,20 @@
-{% extends 'base.html'%}
+{% extends 'admin_base.html'%}
 
 
 {% block title %}
-   Admin DashBoard
+   Book Requests
 {% endblock %}
 
 
 {% block content %}
 
-<h1>Admin DashBoard</h1>
+<h2 style="text-align: center;">Book Requests</h2>
 
 
-
-
-<h2>Book Requests</h2>
-
-
-<table class="styled-table">
+<table class="table">
    <thead>
       <tr>
-         <th>Request Id</th>
+         <!-- <th>Request Id</th> -->
          <th>Username</th>
          <th>Book Name</th>
          <th>Request Date</th>
@@ -33,15 +28,15 @@
    <tbody>
       {% for req in book_requests %}
       <tr>
-         <td>{{req.id}}</td>
+         <!-- <td>{{req.id}}</td> -->
          <td>{{req.user_name}}</td>
          <td>{{req.book_name}}</td>
          <td>{{req.request_date}}</td>
          <td>{{req.return_date}}</td>
          <td>{{req.status}}</td>
          <td>
-            <a href="{{url_for('book_accept', status='accepted', id=req.id)}}">Accept</a><br><br>
-            <a href="{{url_for('book_reject', status='rejected', id=req.id)}}">Decline</a>
+            <a href="{{url_for('book_accept', status='accepted', id=req.id)}}" class="btn btn-outline-success">Accept</a><br><br>
+            <a href="{{url_for('book_reject', status='rejected', id=req.id)}}" class="btn btn-outline-danger">Decline</a>
 
          </td>
         

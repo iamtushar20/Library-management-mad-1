@@ -1,45 +1,36 @@
-{% extends 'base.html'%}
+{% extends 'admin_base.html'%}
 
 
 {% block title %}
-   Book Issued
+   Book Status
 {% endblock %}
 
 
 {% block content %}
 
-<h1>Admin DashBoard</h1>
+<h2 style="text-align: center;">Book Issued Status</h2>
 
 
-
-
-<h2>Book Issued Status</h2>
-
-
-<table class="styled-table">
+<table class="table">
    <thead>
       <tr>
          
          <th>Book Name</th>
-         
-         
-         
+         <th>See Status</th>
+         <th>See FeedBack</th>
+                
       </tr>
    </thead>
 
    <tbody>
-      {% for req in book_issue %}
+      {% for req in unique_book_names %}
       <tr>
-         {% if req.approved == 'Accepted' %}
-         <td><a href="{{url_for('book_status_info', name=req.book_name)}}">{{req.book_name}}</a></td>
-         {% endif %}
          
-         
-        
-         
-       
-         
-        
+         <td>{{req.book_name}}</td>
+            
+         <td><a href="{{url_for('book_status_info', name=req.book_name)}}" class="btn btn-outline-info">Status</a></td>
+         <td><a href="{{url_for('see_feedback', name=req.book_name)}}" class="btn btn-outline-secondary">FeedBack</a></td>
+                 
       </tr>
       {% endfor %}
    </tbody>

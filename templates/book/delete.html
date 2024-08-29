@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 
 {% block title %}
     Delete Book
@@ -8,13 +8,19 @@
 {% block content %}
     <h1>Delete Book </h1>
 
-    <p>Are you sure you want to delete {{book.name}}</p>
+    <p>Are you sure you want to delete <b>{{book.name}}</b></p>
 
-    <form action="" method="post" class="">
-        <button type="submit">
-            <i class="fas fa-trash"></i>
-            Delete
-        </button>
-    </form>
+    <div class="form-group">
+
+        
+        <form action="" method="post" class="form">
+            <button type="submit" class="btn btn-danger">
+            
+                Delete
+            </button>
+        </form>
+
+    </div>
+
 
     {% endblock %}

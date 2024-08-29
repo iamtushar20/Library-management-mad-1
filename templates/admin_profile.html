@@ -1,4 +1,4 @@
-{% extends 'user_base.html' %}
+{% extends 'admin_base.html' %}
 
 {% block title %}
     Profile Page
@@ -7,9 +7,9 @@
 
 {% block content %}
     <div class="heading">
-        <h3 class="display-2">
+        <h3 class="display-1">
             Welcome
-            <span class="text-muted">{{user.name}} !</span>
+            <span class="text-muted">{{user.name}}</span>
         </h3>
         
     </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
             <label for="password" class="form-label">New Password:</label>
-            <input type="password" name="password" id="password" class="form-control">
+            <input type="password" name="password" id="password" class="form-control" >
         </div>
         <div class="form-group">
             <label for="name" class="form-label">Name</label>

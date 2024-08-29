@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+      #pieChart, #barChart, #booksPerSectionPieChart #issuedBooksChart{
+          max-width: 300px; 
+          width: 100%; 
+          height: 100px; 
+          margin: 0 auto; 
+          display: block; 
+      }
+
+      .charts-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .chart-container {
+            width: 48%;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-title-text {
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            color: rgb(197, 20, 20);
+            margin-top: 10px;
+        }
+  </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('admin')}}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('dashboard')}}">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin_section_show')}}">Sections</a>
+              </li>
+    
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('all_books')}}">Books</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin_book_requests')}}">Book Requests</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin_book_issued_list')}}">Book Issued</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('book_status')}}">Book Status</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('profile') }}" >Profile</a>
+              </li>
+            </ul>
+
+            <div class="ml-auto">
+                <button class="btn btn-link"><a href="{{url_for('logout')}}" class="btn btn-outline-danger">Logout</a></button>
+            </div>
+          </div>
+        </div>
+    
+    
+      </nav>
+    <h1>Library Management Dashboard</h1>
+
+    <div class="charts-container">
+        
+       
+    </div>
+
+    <div class="charts-container">
+    <div class="chart-container">
+        <canvas id="barChart" width="400" height="400"></canvas>
+    </div>
+
+    
+        <!-- Pie Chart for Number of Books per Section -->
+    <div class="chart-container">
+        <canvas id="booksPerSectionPieChart" width="400" height="400"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="issuedBooksChart" width="400" height="400"></canvas>
+    </div>
+
+    </div>
+
+    
+
+
+    <script>
+        var userCount = {{ user_count }};
+        var bookCount = {{ book_count }};
+        var sectionCount = {{ section_count }};
+        var bookIssueCount = {{ book_issue_count }};
+        var currentBookRequestCount = {{ book_request_count }};
+
+        
+        var ctxBar = document.getElementById('barChart').getContext('2d');
+        
+
+       
+        var barData = {
+            labels: ['Users', 'Books', 'Sections', 'Book Issues','Current Book Request'],
+            datasets: [{
+                label: 'Count',
+                data: [userCount, bookCount, sectionCount, bookIssueCount, currentBookRequestCount],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+       
+
+        var barChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: barData,
+            options: {
+                responsive: true,
+                text: 'No. of Records',
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'No. of Records in Each Table'
+                    }
+                }
+            }
+        });
+
+
+        // ====================
+        var sectionsData = JSON.parse('{{ section_data | tojson | safe }}');
+
+        var labels = sectionsData.map(data => data.section_name);  // Section names
+        var counts = sectionsData.map(data => data.book_count);  // Book counts
+
+        var ctx = document.getElementById('booksPerSectionPieChart').getContext('2d');
+
+        var booksPerSectionPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Number of Books in the Section',
+                    data: counts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Number of Books per Section' // Title for the chart
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Books in each Section'
+                    }
+                }
+            }
+        });
+
+
+        
+
+        var labels = {{ top_books_labels | tojson | safe }};
+        var counts = {{ top_books_counts | tojson | safe }};
+
+        var ctx = document.getElementById('issuedBooksChart').getContext('2d');
+        var issuedBooksChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'No. of times issued',
+                    data: counts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1, // Set the step size for ticks to 1
+                            callback: function(value, index, values) {
+                                return value; // Display the tick value as-is
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top 5 Issued Books'
+                    }
+                }
+            }
+        });
+
+
+
+        
+    </script>
+
+
+<footer>
+    <br><br>
+    <p>&copy; <b>2024 Library Management System </b></p>
+</footer>
+
+</body>
+</html>

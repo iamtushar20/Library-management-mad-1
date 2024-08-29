@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 
 {% block title %}
     Edit Section
@@ -10,30 +10,29 @@
 
 <h1>Edit Section</h1>
 
-<div class="form_group">
-    <form action="" method="post">
-        <label for="name">Section Name:</label>
+<div class="form-group">
+    <form action="" method="post" class="form">
+        <label for="name" class="form-label">Section Name:</label>
         <input type="text" 
         name="name"
         id="name"
         value="{{section.name}}"
-        required>bg-body-tertiary
+        required class="form-control" >
     
-        <label for="date_created">Date Created</label>
+        <label for="date_created" class="form-label">Date Created</label>
         <input type="date"
         name="date_created"
         id="date_created"
         value="{{section.date_created}}"
-        required>
+        required class="form-control" readonly>
     
     
-        <label for="description">Description:</label>
+        <label for="description" class="form-label">Description:</label>
         <textarea id="description" 
         name="description" 
         rows="4" cols="50" 
         placeholder="Enter your description here"
-        value="{{ section.description }}"
-        required></textarea><br><br>
+        required class="form-control">{{ section.description }}</textarea><br><br>
     
         <button type="submit" class="btn btn-success">
             Update
